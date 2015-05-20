@@ -1,0 +1,21 @@
+
+def capitalize(String string) {
+    if (string != null && string.length() > 0) {
+        return string[0].toUpperCase() + string.substring(1);
+    }
+    else {
+        return "";
+    }
+}
+
+def Properties getRootProperties() {
+    File gradlePropertiesFile = rootProject.file('gradle.properties')
+    Properties gradleProperties = new Properties()
+    gradleProperties.load(new FileInputStream(gradlePropertiesFile))
+    return gradleProperties;
+}
+
+ext {
+    capitalize = this.&capitalize
+    getRootProperties = this.&getRootProperties
+}

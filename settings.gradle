@@ -1,0 +1,5 @@
+include ':sdk-library', ':sdk-library-release'
+include ':library:gson-lib'
+include ':android-library'
+include ':apps:test-app'
+include ':apps:customer-apps:customer-app'

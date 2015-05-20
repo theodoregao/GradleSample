@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/GradleSample.iml" filepath="$PROJECT_DIR$/GradleSample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android-library/android-library.iml" filepath="$PROJECT_DIR$/android-library/android-library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apps/apps.iml" filepath="$PROJECT_DIR$/apps/apps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apps/customer-apps/customer-app/customer-app.iml" filepath="$PROJECT_DIR$/apps/customer-apps/customer-app/customer-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apps/customer-apps/customer-apps.iml" filepath="$PROJECT_DIR$/apps/customer-apps/customer-apps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/gson-lib/gson-lib.iml" filepath="$PROJECT_DIR$/library/gson-lib/gson-lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/library/library.iml" filepath="$PROJECT_DIR$/library/library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sdk-library/sdk-library.iml" filepath="$PROJECT_DIR$/sdk-library/sdk-library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sdk-library-release/sdk-library-release.iml" filepath="$PROJECT_DIR$/sdk-library-release/sdk-library-release.iml" />
+      <module fileurl="file://$PROJECT_DIR$/apps/test-app/test-app.iml" filepath="$PROJECT_DIR$/apps/test-app/test-app.iml" />
+    </modules>
+  </component>
+</project>

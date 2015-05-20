@@ -1,0 +1,60 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 22
+    buildToolsVersion "22.0.1"
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode getRootProperties().versionId.toInteger()
+        versionName getRootProperties().versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+// load signing properties
+    File signFile = new File(getRootProperties().certificationDir, getRootProperties().signProperties)
+    if (signFile.exists()) {
+        Properties signProperties = new Properties()
+        signProperties.load(new FileInputStream(signFile))
+        signingConfigs {
+            keystore {
+                storeFile new File(getRootProperties().certificationDir, signProperties.keystore)
+                storePassword signProperties.keystore_password
+                keyAlias signProperties.key_alias
+                keyPassword signProperties.key_password
+            }
+        }
+    }
+    productFlavors {
+        standard {
+            applicationId = "shun.gao.sg.test_app"
+        }
+        emulator {
+            applicationId = "shun.gao.sg.test_app.emulator"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.keystore
+        }
+        debug {
+            applicationIdSuffix ".debug"
+            versionNameSuffix ".debug"
+        }
+    }
+}
+
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile project(':sdk-library')
+}

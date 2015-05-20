@@ -1,0 +1,66 @@
+//apply plugin: 'com.android.library'
+apply plugin: 'java'
+
+//android {
+//    compileSdkVersion 22
+//    buildToolsVersion "22.0.1"
+//
+//    defaultConfig {
+//        minSdkVersion 16
+//        targetSdkVersion 22
+//        versionCode getRootProperties().versionId.toInteger()
+//        versionName getRootProperties().versionName
+//    }
+//    buildTypes {
+//        release {
+//            minifyEnabled false
+//            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//        }
+//    }
+//}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+//    compile 'com.android.support:appcompat-v7:22.1.1'
+    compile 'eu.the4thfloor.volley:com.android.volley:2015.05.13'
+    compile project(':library:gson-lib')
+}
+
+task fatJar(type: Jar) {
+    group 'Panasonic InFlight Android SDK Task'
+    description 'Create a Jar file with dependencies'
+
+    baseName "release"
+    version getRootProperties().versionName
+
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
+
+task releaseJar(type: Copy) {
+    group 'Panasonic InFlight Android SDK Task'
+    description 'generate jar file and copy to other projects'
+    dependsOn fatJar
+    dependsOn ':sdk-library-release:clearLibrary'
+
+    from fileTree("$buildDir/libs")
+//    from fileTree("$buildDir/libs", { ->
+//        include 'sdk-library-stand-alone.jar'
+//    })
+    into new File(project(':sdk-library-release').projectDir, '/libs/')
+}
+
+task zipRelease(type: Zip) {
+    group 'Panasonic InFlight Android SDK Task'
+    description 'zip all the files, including jar, documentation'
+    dependsOn fatJar
+    dependsOn javadoc
+
+    baseName "release"
+    version getRootProperties().versionName
+    destinationDir file("$buildDir")
+
+    from fileTree("$buildDir/libs")
+    from fileTree("$buildDir/docs")
+    include "**"
+}
